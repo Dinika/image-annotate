@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tauri App</title>
   <script type="module" src="/src/main.ts" defer></script>
+
   <style>
     .logo.vite:hover {
       filter: drop-shadow(0 0 2em #747bff);
@@ -22,7 +23,10 @@
   <div class="container">
     <h1>Welcome to Tauri!</h1>
 
-    <button onclick="buttonclicked()"></button>
+    <button onclick="buttonclicked()">Start Drawing</button>
+
+    <a id="download" download="triangle.png" style="width: 100px; height:100px; background: #2d79c7;"></a>
+    <button onclick="downloadcanvas()">Download</button>
 
     <input type="file" accept="image/jpeg, image/png, image/jpg">
     <output></output>
@@ -31,84 +35,15 @@
 
   </div>
 
-  <script>
-    const input = document.querySelector("input")
-    const output = document.querySelector("output")
-    let imagesArray = []
+  <script type="module" src="./src/download.js" defer></script>
 
-    input.addEventListener("change", (ev) => {
-      if (ev.target.files) {
-        let file = ev.target.files[0];
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = function (e) {
-          var image = new Image();
-          image.src = e.target.result;
-          image.onload = function (ev) {
-            var canvas = document.getElementById('myCanvas');
-            canvas.width = image.width;
-            canvas.height = image.height;
-            var ctx = canvas.getContext('2d');
-            ctx.drawImage(image, 0, 0);
-
-          }
-        }
-      }
-    })
-
-
-    function buttonclicked() {
-      console.log('Start drawing');
-
-      window.addEventListener("mousedown", startDrawing);
-      window.addEventListener("mouseup", endDrawing);
-      window.addEventListener("mousemove", draw);
-    }
-
-    let drawing = false;
-
-    function startDrawing(e) {
-      var canvas = document.getElementById("myCanvas");
-      const context = canvas.getContext("2d");
-      drawing = true;
-      context.beginPath();
-    }
-
-    function endDrawing(e) {
-      drawing = false;
-
-
-      window.removeEventListener("mousedown", startDrawing);
-      window.removeEventListener("mouseup", endDrawing);
-      window.removeEventListener("mousemove", draw);
-    }
-
-    function getMousePos(canvas, evt) {
-      var canvas = document.getElementById("myCanvas");
-      const context = canvas.getContext("2d");
-      var rect = canvas.getBoundingClientRect(),
-        scaleX = canvas.width / rect.width,
-        scaleY = canvas.height / rect.height;
-
-      return {
-        x: (evt.clientX - rect.left) * scaleX,
-        y: (evt.clientY - rect.top) * scaleY
-      }
-    }
-
-    function draw(e) {
-      var canvas = document.getElementById("myCanvas");
-      const context = canvas.getContext("2d");
-      if (!drawing) return;
-
-      let { x, y } = getMousePos(canvas, e);
-
-      context.lineTo(x, y);
-      context.stroke();
-    }
-
-
+  <script type="module">
+    import { downloadcanvas, buttonclicked } from "./src/download.js";
+    window.downloadcanvas = downloadcanvas;
+    window.buttonclicked = buttonclicked;
+    
   </script>
+  
 </body>
 
 </html>

@@ -107,3 +107,10 @@ button {
     background-color: #0f0f0f69;
   }
 }
+
+button {
+  width: max-content;
+  height: 50px;
+  background: white;
+  color: black;
+}
