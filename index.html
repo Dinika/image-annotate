@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <link href=" https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css " rel="stylesheet">
   <link rel="stylesheet" href="/src/styles.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://kit.fontawesome.com/6cb364fa82.js" crossorigin="anonymous"></script>
@@ -11,27 +12,36 @@
 
 <body>
   <div class="container">
-		<canvas width="300" height="300" id="drawPlace" style="border:1px solid #eee"></canvas>
+    <input id="file-selector" type="file" accept="image/jpeg, image/png, image/jpg" onchange="onFileUploaded(event)">
+
+    <canvas width="300" height="300" id="drawPlace"></canvas>
 
     <footer class="toolbar" role="toolbar" aria-label="Image Formatting">
     
       <button type="button" onclick="onDrawClick()" class="toolbar-action" aria-pressed="false" value="doodle" tabindex="0" title="Draw on Image">
-        <i class="fa-solid fa-pencil"></i>
+        <i class="fa-solid fa-pencil fa-lg"></i>
+        <span>Doodle</span>
       </button>
 
       <button type="button" onclick="onClearDrawingClick()" class="toolbar-action" aria-pressed="false" value="doodle" tabindex="0" title="Clear Drawing">
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-xmark fa-xl"></i>
+        <span>Clear Image</span>
       </button>
     
     </footer>
   </div>
 
   <script type="module" src="./src/drawing.js" defer></script>
+  <script type="module" src="./src/image.js" defer></script>
+
   
   <script type="module">
     import { onDrawClick, onClearDrawingClick } from "./src/drawing.js";
+    import { onFileUploaded } from "./src/image.js";
+
     window.onDrawClick = onDrawClick;
     window.onClearDrawingClick = onClearDrawingClick;
+    window.onFileUploaded = onFileUploaded;
   </script>
 
 </body>

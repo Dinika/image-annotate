@@ -1,5 +1,5 @@
-const square = document.getElementById("drawPlace");
-const paper = square.getContext("2d");
+const canvas = document.getElementById("drawPlace");
+const context = canvas.getContext("2d");
 const strokeColor = "#9ACD32";
 
 let isDrawing = false;
@@ -13,7 +13,7 @@ export function onDrawClick() {
 }
 
 export function onClearDrawingClick() {
-    paper.clearRect(0, 0, square.width, square.height);
+    context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function startDrawing(eventvs01) {
@@ -27,7 +27,7 @@ function drawLine(eventvs02) {
         document.getElementById("drawPlace").style.cursor = "crosshair";
         var xM = eventvs02.offsetX;
         var yM = eventvs02.offsetY;
-        drawing_line(strokeColor, x, y, xM, yM, paper);
+        drawing_line(strokeColor, x, y, xM, yM, context);
         x = xM;
         y = yM;
     }
@@ -38,7 +38,7 @@ function stopDrawing() {
     document.getElementById("drawPlace").style.cursor = "default";
 }
 
-drawing_line("#FF6347", x - 1, y, x, y, paper);
+drawing_line("#FF6347", x - 1, y, x, y, context);
 
 function drawing_line(color, x_start, y_start, x_end, y_end, board) {
     board.beginPath();
