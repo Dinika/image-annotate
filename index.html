@@ -13,38 +13,53 @@
 <body>
   <div class="container">
     <div class="file_upload_container">
-      <label for="file-uploader" class="btn">Upload Image</label>
-      <input id="file-uploader" type="file" accept="image/jpeg, image/png, image/jpg" onchange="onFileUploaded(event)">
+      <label for="file-uploader" class="btn">Import Image</label>
+      <input id="file-uploader" type="file" accept="image/jpeg, image/png, image/jpg" onchange="onImageUpload(event)">
     </div>
 
     <canvas width="300" height="300" id="drawPlace"></canvas>
 
     <footer class="toolbar" role="toolbar" aria-label="Image Formatting">
-    
-      <button type="button" onclick="onDrawClick()" class="toolbar-action" aria-pressed="false" value="doodle" tabindex="0" title="Draw on Image">
+
+      <button type="button" onclick="onDrawClick()" class="toolbar-action" aria-pressed="false" value="doodle"
+        tabindex="0" title="Draw on Image">
         <i class="fa-solid fa-pencil fa-lg"></i>
         <span>Doodle</span>
       </button>
 
-      <button type="button" onclick="onClearDrawingClick()" class="toolbar-action" aria-pressed="false" value="doodle" tabindex="0" title="Clear Drawing">
+      <button type="button" onclick="onImageDownload()" class="toolbar-action download" aria-pressed="false"
+        value="doodle" tabindex="0" title="Save Image">
+        <span class="icon-container">
+          <svg height="16px" viewBox="0 0 16 16" width="16px" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m 8 0 c -0.550781 0 -1 0.449219 -1 1 v 8.585938 l -2.292969 -2.292969 c -0.1875 -0.1875 -0.441406 -0.292969 -0.707031 -0.292969 s -0.519531 0.105469 -0.707031 0.292969 c -0.390625 0.390625 -0.390625 1.023437 0 1.414062 l 4 4 c 0.390625 0.390625 1.023437 0.390625 1.414062 0 l 4 -4 c 0.390625 -0.390625 0.390625 -1.023437 0 -1.414062 s -1.023437 -0.390625 -1.414062 0 l -2.292969 2.292969 v -8.585938 c 0 -0.550781 -0.449219 -1 -1 -1 z m -6 14 v 2 h 12 v -2 z m 0 0" />
+          </svg>
+        </span>
+        <span>Save Image</span>
+      </button>
+
+      <button type="button" onclick="onClearDrawingClick()" class="toolbar-action" aria-pressed="false" value="doodle"
+        tabindex="0" title="Clear Drawing">
         <i class="fa-solid fa-xmark fa-xl"></i>
         <span>Clear Image</span>
       </button>
-    
+
     </footer>
   </div>
 
   <script type="module" src="./src/drawing.js" defer></script>
   <script type="module" src="./src/image.js" defer></script>
 
-  
+
   <script type="module">
     import { onDrawClick, onClearDrawingClick } from "./src/drawing.js";
-    import { onFileUploaded } from "./src/image.js";
+    import { onImageUpload, onImageDownload } from "./src/image.js";
 
     window.onDrawClick = onDrawClick;
     window.onClearDrawingClick = onClearDrawingClick;
-    window.onFileUploaded = onFileUploaded;
+    window.onImageUpload = onImageUpload;
+    window.onImageDownload = onImageDownload;
+
   </script>
 
 </body>
