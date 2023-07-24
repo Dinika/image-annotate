@@ -22,10 +22,13 @@
   <div class="container">
     <h1>Welcome to Tauri!</h1>
 
+    <button onclick="buttonclicked()"></button>
+
     <input type="file" accept="image/jpeg, image/png, image/jpg">
     <output></output>
 
     <canvas id="myCanvas" style="border:1px solid grey" width="1000px" height="1000px"></canvas>
+
   </div>
 
   <script>
@@ -52,6 +55,58 @@
         }
       }
     })
+
+
+    function buttonclicked() {
+      console.log('Start drawing');
+
+      window.addEventListener("mousedown", startDrawing);
+      window.addEventListener("mouseup", endDrawing);
+      window.addEventListener("mousemove", draw);
+    }
+
+    let drawing = false;
+
+    function startDrawing(e) {
+      var canvas = document.getElementById("myCanvas");
+      const context = canvas.getContext("2d");
+      drawing = true;
+      context.beginPath();
+    }
+
+    function endDrawing(e) {
+      drawing = false;
+
+
+      window.removeEventListener("mousedown", startDrawing);
+      window.removeEventListener("mouseup", endDrawing);
+      window.removeEventListener("mousemove", draw);
+    }
+
+    function getMousePos(canvas, evt) {
+      var canvas = document.getElementById("myCanvas");
+      const context = canvas.getContext("2d");
+      var rect = canvas.getBoundingClientRect(),
+        scaleX = canvas.width / rect.width,
+        scaleY = canvas.height / rect.height;
+
+      return {
+        x: (evt.clientX - rect.left) * scaleX,
+        y: (evt.clientY - rect.top) * scaleY
+      }
+    }
+
+    function draw(e) {
+      var canvas = document.getElementById("myCanvas");
+      const context = canvas.getContext("2d");
+      if (!drawing) return;
+
+      let { x, y } = getMousePos(canvas, e);
+
+      context.lineTo(x, y);
+      context.stroke();
+    }
+
 
   </script>
 </body>
