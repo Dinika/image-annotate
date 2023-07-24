@@ -6,43 +6,16 @@
   <link rel="stylesheet" href="/src/styles.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tauri App</title>
-  <script type="module" src="/src/main.ts" defer></script>
-
-  <style>
-    .logo.vite:hover {
-      filter: drop-shadow(0 0 2em #747bff);
-    }
-
-    .logo.typescript:hover {
-      filter: drop-shadow(0 0 2em #2d79c7);
-    }
-  </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Welcome to Tauri!</h1>
-
-    <button onclick="buttonclicked()">Start Drawing</button>
-
-    <a id="download" download="triangle.png" style="width: 100px; height:100px; background: #2d79c7;"></a>
-    <button onclick="downloadcanvas()">Download</button>
-
-    <input type="file" accept="image/jpeg, image/png, image/jpg">
-    <output></output>
-
-    <canvas id="myCanvas" style="border:1px solid grey" width="1000px" height="1000px"></canvas>
-
+		<h1>Drawing with the mouse</h1>
+		<p>Move the mouse and click to draw.<br />Press "C" to clear canvas</p>
+		<canvas width="300" height="300" id="drawPlace" style="border:1px solid #eee"></canvas>
   </div>
 
-  <script type="module" src="./src/download.js" defer></script>
-
-  <script type="module">
-    import { downloadcanvas, buttonclicked } from "./src/download.js";
-    window.downloadcanvas = downloadcanvas;
-    window.buttonclicked = buttonclicked;
-    
-  </script>
+  <script type="module" src="./src/drawing.js" defer></script>
   
 </body>
 
