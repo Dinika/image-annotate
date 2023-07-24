@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tauri App</title>
+  <script type="module" src="/src/main.ts" defer></script>
+  <style>
+    .logo.vite:hover {
+      filter: drop-shadow(0 0 2em #747bff);
+    }
+
+    .logo.typescript:hover {
+      filter: drop-shadow(0 0 2em #2d79c7);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Welcome to Tauri!</h1>
+
+    <input type="file" accept="image/jpeg, image/png, image/jpg">
+    <output></output>
+
+    <canvas id="myCanvas" style="border:1px solid grey" width="1000px" height="1000px"></canvas>
+  </div>
+
+  <script>
+    const input = document.querySelector("input")
+    const output = document.querySelector("output")
+    let imagesArray = []
+
+    input.addEventListener("change", (ev) => {
+      if (ev.target.files) {
+        let file = ev.target.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function (e) {
+          var image = new Image();
+          image.src = e.target.result;
+          image.onload = function (ev) {
+            var canvas = document.getElementById('myCanvas');
+            canvas.width = image.width;
+            canvas.height = image.height;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(image, 0, 0);
+
+          }
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
