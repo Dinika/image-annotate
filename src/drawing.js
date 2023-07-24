@@ -1,16 +1,20 @@
 const square = document.getElementById("drawPlace");
 const paper = square.getContext("2d");
 const strokeColor = "#9ACD32";
-const clearDrawingKey = { C: 67 };
 
 let isDrawing = false;
 let x;
 let y;
 
-document.addEventListener("mousedown", startDrawing);
-document.addEventListener("mousemove", drawLine);
-document.addEventListener("mouseup", stopDrawing);
-document.addEventListener("keydown", clearCanvas);
+export function onDrawClick() {
+    document.addEventListener("mousedown", startDrawing);
+    document.addEventListener("mousemove", drawLine);
+    document.addEventListener("mouseup", stopDrawing);
+}
+
+export function onClearDrawingClick() {
+    paper.clearRect(0, 0, square.width, square.height);
+}
 
 function startDrawing(eventvs01) {
     isDrawing = true;
@@ -32,12 +36,6 @@ function drawLine(eventvs02) {
 function stopDrawing() {
     isDrawing = false;
     document.getElementById("drawPlace").style.cursor = "default";
-}
-
-function clearCanvas(whenPressKey) {
-    if (whenPressKey.keyCode == clearDrawingKey.C) {
-        paper.clearRect(0, 0, square.width, square.height);
-    }
 }
 
 drawing_line("#FF6347", x - 1, y, x, y, paper);

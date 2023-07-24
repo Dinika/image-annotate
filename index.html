@@ -5,18 +5,35 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="/src/styles.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tauri App</title>
+  <script src="https://kit.fontawesome.com/6cb364fa82.js" crossorigin="anonymous"></script>
+  <title>Image Annotate</title>
 </head>
 
 <body>
   <div class="container">
-		<h1>Drawing with the mouse</h1>
-		<p>Move the mouse and click to draw.<br />Press "C" to clear canvas</p>
 		<canvas width="300" height="300" id="drawPlace" style="border:1px solid #eee"></canvas>
+
+    <footer class="toolbar" role="toolbar" aria-label="Image Formatting">
+    
+      <button type="button" onclick="onDrawClick()" class="toolbar-action" aria-pressed="false" value="doodle" tabindex="0" title="Draw on Image">
+        <i class="fa-solid fa-pencil"></i>
+      </button>
+
+      <button type="button" onclick="onClearDrawingClick()" class="toolbar-action" aria-pressed="false" value="doodle" tabindex="0" title="Clear Drawing">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    
+    </footer>
   </div>
 
   <script type="module" src="./src/drawing.js" defer></script>
   
+  <script type="module">
+    import { onDrawClick, onClearDrawingClick } from "./src/drawing.js";
+    window.onDrawClick = onDrawClick;
+    window.onClearDrawingClick = onClearDrawingClick;
+  </script>
+
 </body>
 
 </html>
