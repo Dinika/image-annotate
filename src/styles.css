@@ -2,6 +2,8 @@
   --gnome-dark-1: #77767b;
   --gnome-dark-5: #000000;
   --gnome-blue-2: #62a0ea;
+  --gnone-blue-3: #3584e4;
+  --gnome-blue-5: #1a5fb4;
   --toolbar-height: 72px;
 }
 
@@ -9,18 +11,26 @@
 body {
   width: 100%;
   height: 100%;
+  max-width: 100vw;
   background: var(--gnome-dark-1);
 }
 
 .container {
   width: 100%;
   height: 100%;
+  max-width: 100vw;
   display: flex;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 canvas {
-  margin: 0 auto;
-  max-height: calc(100vh - var(--toolbar-height) - 20px);
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin:auto;
 }
 
 #file-selector {
@@ -64,5 +74,30 @@ button.toolbar-action span {
   margin-top: 20px;
   font-size: 12px;
   display: inline-block;
+}
 
+input[type=file]::file-selector-button {
+  display: none;
+}
+
+.file_upload_container label {
+  background-color: #3584e4;
+  color: white;
+  height: 44px;
+  display: flex;
+  width: max-content;
+  align-items: center;
+  padding: 0px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 99;
+}
+
+.file_upload_container label:active {
+  background-color: var(--gnome-blue-5);
 }

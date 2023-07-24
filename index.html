@@ -12,7 +12,10 @@
 
 <body>
   <div class="container">
-    <input id="file-selector" type="file" accept="image/jpeg, image/png, image/jpg" onchange="onFileUploaded(event)">
+    <div class="file_upload_container">
+      <label for="file-uploader" class="btn">Upload Image</label>
+      <input id="file-uploader" type="file" accept="image/jpeg, image/png, image/jpg" onchange="onFileUploaded(event)">
+    </div>
 
     <canvas width="300" height="300" id="drawPlace"></canvas>
 
