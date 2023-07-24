@@ -20,6 +20,11 @@ yarn
 yarn tauri dev
 ```
 
+## Bug
+
+The drawing is a bit janky at the moment:
+
+![Drawing a path using the mousemove event](./Kooha-2023-07-24-15-16-17.gif)
 
 ## Recommended IDE Setup
 
