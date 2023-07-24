@@ -1,6 +1,25 @@
-# Tauri + Vanilla TS
+# Image Annotate 🖼️
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Typescript.
+A desktop application for simple image edits like adding text, drawing shapes, and doodling.
+
+
+## Development ⚒️
+
+1. Clone this repository
+```bash
+git clone git@github.com:Dinika/image-annotate.git
+```
+
+2. Install dependencies
+```bash
+yarn
+```
+
+3. Start development environment
+```bash
+yarn tauri dev
+```
+
 
 ## Recommended IDE Setup
 
