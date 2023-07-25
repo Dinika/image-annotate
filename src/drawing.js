@@ -1,5 +1,6 @@
 const canvas = document.getElementById("drawPlace");
 const context = canvas.getContext("2d");
+
 const strokeColor = "#9ACD32";
 
 let isDrawing = false;
@@ -9,6 +10,12 @@ let y;
 export function onDrawClick() {
     document.addEventListener("mousedown", startDrawing);
     document.addEventListener("mousemove", drawLine);
+    document.addEventListener("mouseup", stopDrawing);
+}
+
+export function onRectangleClick() {
+    document.addEventListener("mousedown", startDrawing);
+    document.addEventListener("mousemove", drawRectangle);
     document.addEventListener("mouseup", stopDrawing);
 }
 
@@ -31,6 +38,18 @@ function drawLine(eventvs02) {
         x = xM;
         y = yM;
     }
+}
+
+function drawRectangle(event) {
+    if (!isDrawing) { return }
+
+    const mouseX = parseInt(event.clientX - canvas.offsetLeft);
+    const mouseY = parseInt(event.clientY - canvas.offsetTop);
+
+    const rectWidth = mouseX - x;
+    const rectHeight = mouseY - y;
+
+    context.strokeRect(x, y, rectWidth, rectHeight);
 }
 
 function stopDrawing() {
