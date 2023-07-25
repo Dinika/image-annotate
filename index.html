@@ -17,7 +17,9 @@
       <input id="file-uploader" type="file" accept="image/jpeg, image/png, image/jpg" onchange="onImageUpload(event)">
     </div>
 
-    <canvas width="300" height="300" id="drawPlace"></canvas>
+    <canvas id="drawPlace" width="300" height="300"></canvas>
+    <!-- The temporary-canvas is used to allow erasable drawing -->
+    <canvas id="temporary-canvas" width=300 height=300></canvas> 
 
     <footer class="toolbar" role="toolbar" aria-label="Image Formatting">
 

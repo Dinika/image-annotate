@@ -28,13 +28,24 @@ body {
   justify-content: center;
 }
 
-canvas {
+#drawPlace {
   position: absolute;
   top:0;
   bottom: 0;
   left: 0;
   right: 0;
   margin:auto;
+  border: 1px solid var(--gnome-blue-2);
+}
+
+#temporary-canvas {
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin:auto;
+  border: 1px solid var(--gnome-green-2);
 }
 
 #file-selector {
