@@ -4,6 +4,7 @@ import { writeBinaryFile } from '@tauri-apps/api/fs';
 
 const canvas = document.getElementById("drawPlace");
 const context = canvas.getContext("2d");
+const temporaryCanvas = document.getElementById("temporary-canvas");
 
 export function onImageUpload(event) {
     if (event.target.files) {
@@ -16,6 +17,9 @@ export function onImageUpload(event) {
             image.onload = function () {
                 canvas.width = image.width;
                 canvas.height = image.height;
+                temporaryCanvas.width = image.width;
+                temporaryCanvas.height = image.height;
+
                 context.drawImage(image, 0, 0);
             }
         }

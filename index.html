@@ -19,7 +19,7 @@
 
     <canvas id="drawPlace" width="300" height="300"></canvas>
     <!-- The temporary-canvas is used to allow erasable drawing -->
-    <canvas id="temporary-canvas" width=300 height=300></canvas> 
+    <canvas id="temporary-canvas" width=300 height=300></canvas>
 
     <footer class="toolbar" role="toolbar" aria-label="Image Formatting">
 
@@ -28,12 +28,14 @@
         <span>Doodle</span>
       </button>
 
-      <button type="button" onclick="onRectangleClick()" class="toolbar-action rectangle" aria-pressed="false" title="Rectangle">
+      <button type="button" onclick="onRectangleClick()" class="toolbar-action rectangle" aria-pressed="false"
+        title="Rectangle">
         <div class="rectangle-icon"></div>
         <span>Rectangle</span>
       </button>
 
-      <button type="button" onclick="onImageDownload()" class="toolbar-action download" aria-pressed="false" title="Save Image">
+      <button type="button" onclick="onImageDownload()" class="toolbar-action download" aria-pressed="false"
+        title="Save Image">
         <span class="icon-container">
           <svg height="16px" viewBox="0 0 16 16" width="16px" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -43,7 +45,8 @@
         <span>Save Image</span>
       </button>
 
-      <button type="button" onclick="onClearDrawingClick()" class="toolbar-action" aria-pressed="false" title="Clear Drawing">
+      <button type="button" onclick="onClearDrawingClick()" class="toolbar-action" aria-pressed="false"
+        title="Clear Drawing">
         <i class="fa-solid fa-xmark fa-xl"></i>
         <span>Clear Image</span>
       </button>
@@ -56,16 +59,24 @@
 
 
   <script type="module">
-    import { onDrawClick, onClearDrawingClick, onRectangleClick } from "./src/drawing.js";
+    import { onDrawClick, onClearDrawingClick, onRectangleClick, removeDrawingListeners } from "./src/drawing.js";
     import { onImageUpload, onImageDownload } from "./src/image.js";
 
     window.onDrawClick = onDrawClick;
     window.onRectangleClick = onRectangleClick;
     window.onClearDrawingClick = onClearDrawingClick;
+    window.removeDrawingListeners = removeDrawingListeners;
 
-    window.onImageUpload = onImageUpload;
-    window.onImageDownload = onImageDownload;
-    
+    window.onImageUpload = (event) => { 
+      removeDrawingListeners();
+       onImageUpload(event)
+    };
+
+    window.onImageDownload = (event) => { 
+      removeDrawingListeners(); 
+      onImageDownload(event);
+   };
+
   </script>
 
 </body>

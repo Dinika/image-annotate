@@ -1,6 +1,7 @@
 const canvas = document.getElementById("drawPlace");
-const temporaryCanvas = document.getElementById("temporary-canvas");
 const context = canvas.getContext("2d");
+
+const temporaryCanvas = document.getElementById("temporary-canvas");
 const temporaryContext = temporaryCanvas.getContext("2d");
 
 let rectangleController;
@@ -36,10 +37,16 @@ export function onRectangleClick() {
 export function onClearDrawingClick() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     temporaryContext.clearRect(0, 0, temporaryCanvas.width, temporaryCanvas.height);
+    removeDrawingListeners();
 }
 
+export function removeDrawingListeners() {
+    removeDoodleListeners();
+    removeRectangleListeners();
+}
+
+
 function removeRectangleListeners() {
-    console.log('Cleaning rectangle')
     if (rectangleController) {
         rectangleController.abort();
     }
@@ -64,17 +71,27 @@ function handleMouseDown(e) {
 }
 
 function handleMouseMove(e) {
-    console.log('Mouse Move')
     if (!isDrawing) { return };
-    console.log('Mouse Move Drawing')
 
     const mouseX = parseInt(e.clientX - canvas.offsetLeft);
     const mouseY = parseInt(e.clientY - canvas.offsetTop);
 
-    // Put your mousemove stuff here
-    temporaryContext.clearRect(0, 0, temporaryCanvas.width, temporaryCanvas.height);
-    drawRect(mouseX, mouseY, temporaryContext);
 
+    // temporaryContext.clearRect(startX, startY, width, height);
+    temporaryContext.clearRect(0, 0, temporaryCanvas.width, temporaryCanvas.height);
+
+    drawRect(mouseX, mouseY, temporaryContext, true);
+}
+
+function drawLine(eventvs02) {
+    if (isDrawing) {
+        document.getElementById("drawPlace").style.cursor = "crosshair";
+        var xM = eventvs02.offsetX;
+        var yM = eventvs02.offsetY;
+        drawing_line(strokeColor, startX, startY, xM, yM, context);
+        startX = xM;
+        startY = yM;
+    }
 }
 
 function handleMouseUp(e) {
@@ -94,53 +111,13 @@ function drawRect(toX, toY, ctx) {
     ctx.stroke();
 }
 
-function startRectangle(event) {
-    startDrawing(event);
-    showTemporaryCanvas();
-    temporaryContext.clearRect(0, 0, temporaryCanvas.width, temporaryCanvas.height);
-}
-
-function stopRectangle(event) {
-    stopDrawing();
-    hideTemporaryCanvas();
-
-    const mouseX = parseInt(event.clientX - context.offsetLeft);
-    const mouseY = parseInt(event.clientY - context.offsetTop);
-
-    drawRectangle(mouseX, mouseY, context);
-}
-
 function startDrawing(eventvs01) {
     isDrawing = true;
     startX = eventvs01.offsetX;
     startY = eventvs01.offsetY;
 }
 
-function drawLine(eventvs02) {
-    if (isDrawing) {
-        document.getElementById("drawPlace").style.cursor = "crosshair";
-        var xM = eventvs02.offsetX;
-        var yM = eventvs02.offsetY;
-        drawing_line(strokeColor, startX, startY, xM, yM, context);
-        startX = xM;
-        startY = yM;
-    }
-}
 
-function mouseMoveRectangle(event) {
-    if (!isDrawing) { return }
-    const mouseX = parseInt(event.clientX - canvas.offsetLeft);
-    const mouseY = parseInt(event.clientY - canvas.offsetTop);
-
-    temporaryContext.clearRect(0, 0, temporaryCanvas.width, temporaryCanvas.height);
-    drawRectangle(mouseX, mouseY, temporaryContext);
-}
-
-function drawRectangle(mouseX, mouseY, ctx) {
-    ctx.beginPath();
-    ctx.rect(startX, startY, mouseX - startX, mouseY - startY);
-    ctx.stroke();
-}
 
 function stopDrawing() {
     isDrawing = false;
@@ -160,11 +137,9 @@ function drawing_line(color, x_start, y_start, x_end, y_end, board) {
 }
 
 function showTemporaryCanvas() {
-    console.log('Showing canvas')
     temporaryCanvas.style.left = '0'
 }
 
 function hideTemporaryCanvas() {
-    console.log('Hiding canvas')
     temporaryCanvas.style.left = '-5000px';
 }
